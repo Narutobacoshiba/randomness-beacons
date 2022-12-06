@@ -1,0 +1,26 @@
+{
+  "name": "drand-verify",
+  "collaborators": [
+    "Simon Warta <simon@warta.it>"
+  ],
+  "description": "A drand verification library.",
+  "version": "0.3.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CosmWasm/drand-verify"
+  },
+  "files": [
+    "drand_verify_bg.wasm",
+    "drand_verify.js",
+    "drand_verify.d.ts"
+  ],
+  "main": "drand_verify.js",
+  "types": "drand_verify.d.ts",
+  "dependencies": {
+    "config": "^3.3.8",
+    "cosmwasm": "^1.1.1",
+    "drand-client": "^0.2.0",
+    "secp256k1": "^4.0.3"
+  }
+}

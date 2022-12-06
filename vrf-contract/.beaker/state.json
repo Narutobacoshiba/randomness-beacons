@@ -1,0 +1,15 @@
+{
+  "serenity": {
+    "vrf-contract": {
+      "code_id": 811,
+      "addresses": {
+        "test-2": "aura1uv6ztmu0cz5sslfpgftx0p04tkqqfyt406qdr2w23df95k55l6psmk9jk2",
+        "test-3": "aura1elr0mm422rppw07h07mg8em2prclh7y0ww8szx6g5aagghxx08jsll4ayv",
+        "test-4": "aura1zl5wzcm0z05zxtgt8xh4klejul7utrghc8zdvnu9xal5vq8m3d0svdylny"
+      },
+      "proposal": {
+        "store_code": null
+      }
+    }
+  }
+}
