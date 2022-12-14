@@ -1,14 +1,14 @@
 {
     "user":{
         "publicKey":"",
-        "mnemonic":"fat history among correct tribe face armed rough language wonder era ribbon puppy car subject cube provide video math address simple skate swap oval"
+        "mnemonic":"deputy cousin control dentist cost rich mention stomach rabbit amazing glove gain lend sign bronze mushroom task wedding captain add script wrestle repair camp"
     },
     "chain":{
-        "rpcEndpoint": "https://rpc.serenity.aura.network",
+        "rpcEndpoint": "https://rpc.euphoria.aura.network",
         "prefix": "aura",
-        "denom":"uaura",
-        "chainId":"serenity-testnet-001",
-        "abt_contract_address":"aura1zl5wzcm0z05zxtgt8xh4klejul7utrghc8zdvnu9xal5vq8m3d0svdylny"
+        "denom":"ueaura",
+        "chainId":"euphoria-2",
+        "abt_contract_address":"aura1sahranyk0w5tjyjj78rfxhez5cahg9wrnmx2y8cguj2ljurm86jsd7uvg7"
     },
     "drand":{
         "chainHash": "8990e7a9aaed2ffed73dbd7092123d6f289930540d7651336225dc172e51b2ce",

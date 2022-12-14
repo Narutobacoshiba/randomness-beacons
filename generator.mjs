@@ -21,25 +21,17 @@ const chainId = config.get('chain.chainId')
 const abt_contract_address = config.get('chain.abt_contract_address')
 
 
-function shuffle(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      x = a[i];
-      a[i] = a[j];
-      a[j] = x;
-    }
-    return a;
-}
 // Using mnemonic
 // You must change mnemonic if you use your mnemonic
 const mnemonic = config.get('user.mnemonic')
 
 // Create a wallet
 const path = stringToPath("m/44'/118'/0'/0/0");
-const wallet = await Secp256k1HdWallet.fromMnemonic(mnemonic, {hdPaths:[path], "prefix":prefix});
+const wallet = await Secp256k1HdWallet.fromMnemonic(mnemonic, 
+    {hdPaths:[path], "prefix":prefix});
 const accs = await wallet.getAccounts();
 const gasPrice = GasPrice.fromString(`0.025${denom}`);
+
 
 // Create Wasm Client
 const client = await SigningCosmWasmClient.connectWithSigner(
@@ -53,6 +45,35 @@ console.log(successColor("SigningCosmWasmClient CONNECTION Success"))
 console.info(infoColor("account:",accs[0].address));
 console.info(infoColor("balance:"),balance); 
 
+const QueryRandomnessMsg = {
+	get_randomness: {
+	}
+};
+const res = await client.queryContractSmart(abt_contract_address, QueryRandomnessMsg);
+console.log("")
+console.log(res)
+console.log("")
+
+try{
+    const ExecuteRequestRandomnessMsg = {
+        get_random_value: {
+            job_id: "job test",
+        }
+    }
+    let register_res = await client.execute(
+        accs[0].address, 
+        abt_contract_address,
+        ExecuteRequestRandomnessMsg,
+        "auto",
+        "randomness token",
+        [{"amount":"300","denom":"ueaura"}]
+    )
+    console.log(register_res)
+}catch(err){
+    console.log(err)
+}
+
+/*
 const urls = config.get('drand.urls').slice() 
 // Shuffle enpoints to reduce likelyhood of two bots ending up with the same endpoint
 shuffle(urls);
@@ -63,14 +84,6 @@ const publicKey = config.get('drand.publicKey')
 const drandGenesis = 1595431050;
 const drandRoundLength = 30;
   
-// See TimeOfRound implementation: https://github.com/drand/drand/blob/eb36ba81e3f28c966f95bcd602f60e7ff8ef4c35/chain/time.go#L30-L33
-function timeOfRound(round) {
-    return drandGenesis + (round - 1) * drandRoundLength;
-}
-
-async function generatePublicKey(){
-    
-}
 
 async function main() {
     
@@ -87,6 +100,7 @@ async function main() {
 
 
     console.info(infoColor("\nRegistering ..."));
+
     try{
         const ExecuteRegisterMsg = {
             register: {
@@ -126,9 +140,14 @@ async function main() {
             
             try{
                 const ExecutePushMsg = {
-                    push: {
+                    push_randomness: {
                         "randomness": res.randomness,
                         "signature": Buffer.from(signObj.signature).toString("hex"),
+                        "drand_response": {
+                            round: res.round,
+                            signature: res.signature,
+                            previous_signature: res.previous_signature
+                        },
                     }
                 }
                 let push_res = await client.execute(accs[0].address, abt_contract_address, ExecutePushMsg, "auto", "push token")
@@ -152,4 +171,4 @@ main().then(
       console.error(error);
       process.exit(1);
     },
-);
+);*/
