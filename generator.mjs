@@ -52,15 +52,18 @@ async function run(mne, job_ids) {
 
     for(const index in job_ids){
         try{
-            const ExecuteRequestRandomnessMsg = {
-                get_random_value: {
-                    job_id: job_ids[index],
+            const ExecuteRequestIntRandomnessMsg = {
+                request_int_randomness: {
+                    _key_hash: job_ids[index],
+                    min: -10,
+                    max: 100,
+                    num: 2,
                 }
             }
             let register_res = await client.execute(
                 accs[0].address, 
                 abt_contract_address,
-                ExecuteRequestRandomnessMsg,
+                ExecuteRequestIntRandomnessMsg,
                 "auto",
                 "randomness token",
                 [{"amount":"300","denom":"ueaura"}]
