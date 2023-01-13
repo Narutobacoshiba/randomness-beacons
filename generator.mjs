@@ -68,6 +68,7 @@ async function run(mne, job_ids) {
                 "randomness token",
                 [{"amount":"300","denom":"ueaura"}]
             )
+
             console.log(register_res)
         }catch(err){
             console.log(err)
@@ -78,7 +79,29 @@ async function run(mne, job_ids) {
 await run(mnemonic, job_ids_1)
 await run(mnemonic2, job_ids_2)
 
-/*
+let api_key = "8e77f892-bf73-4cc5-8f5f-8f4e764d0a2a"
+let api_url = "https://api.random.org/json-rpc/4/invoke"
+
+let data_request = {
+    "jsonrpc":"2.0",
+    "method":"generateSignedIntegers",
+    "params":{
+        "apiKey":api_key,
+        "n":32,
+        "min":0,
+        "max":255,
+        "replacement":true,
+        "base":10,
+        "pregeneratedRandomization":null,
+        "licenseData":null,
+        "userData":null,
+        "ticketId":null
+    },
+    "id":20635
+}
+
+
+
 const urls = config.get('drand.urls').slice() 
 // Shuffle enpoints to reduce likelyhood of two bots ending up with the same endpoint
 shuffle(urls);
@@ -89,7 +112,6 @@ const publicKey = config.get('drand.publicKey')
 const drandGenesis = 1595431050;
 const drandRoundLength = 30;
   
-
 async function main() {
     
     console.info(infoColor("\nGenerate key pair ..."));
@@ -133,8 +155,8 @@ async function main() {
             console.info(infoColor("\nRecived beancon"))
             console.log("Round:",successColor(res.round))
             console.log("Randomness:", successColor(res.randomness))
-            console.log("Signature:",successColor(res.signature))
-            console.log("Previous_signature:",successColor(res.previous_signature))
+            console.log("Signature:", successColor(res.signature))
+            console.log("Previous_signature:", successColor(res.previous_signature))
             let verify = verify_beacon(publicKey, 
                                     res.round, 
                                     res.previous_signature, 
@@ -166,7 +188,7 @@ async function main() {
         }
     }
 }
-  
+
 main().then(
     () => {
       console.info("Done");
@@ -176,4 +198,4 @@ main().then(
       console.error(error);
       process.exit(1);
     },
-);*/
+);

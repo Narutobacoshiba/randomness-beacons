@@ -9,7 +9,8 @@
         "prefix": "aura",
         "denom":"ueaura",
         "chainId":"euphoria-2",
-        "abt_contract_address":"aura1j879ejld472wug49q5wec4nf48kt3zzgse9kfmwlace2238e46pqckrfdh"
+        "aurand_addr":"aura1hdsqfw7556kg5cpa4yrvae5438ktqfdndnu6ty7fclmvgt06snns0zwaql",
+        "test_addr":"aura1m4xsng4z6rqwl3rwv484nglwwglyrzy88fhygstxgz2wewqc3uxqx4evd5"
     },
     "drand":{
         "chainHash": "8990e7a9aaed2ffed73dbd7092123d6f289930540d7651336225dc172e51b2ce",
