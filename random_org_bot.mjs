@@ -26,7 +26,7 @@ const test_addr = config.get('chain.test_addr')
 // You must change mnemonic if you use your mnemonic
 const mnemonic = config.get('user.mnemonic')
 
-const job_ids = ["job 1","job 2", "job 3", "job 4", "job 5"]
+const job_ids = ["job 1","job 2","job 3","job 4","job 5"]
 async function run(mne, job_ids) {
     // Create a wallet
     const path = stringToPath("m/44'/118'/0'/0/0");
@@ -47,19 +47,40 @@ async function run(mne, job_ids) {
     console.log(successColor("SigningCosmWasmClient CONNECTION Success"))
     console.info(infoColor("account:",accs[0].address));
     console.info(infoColor("balance:"),balance); 
+    /*
+    const ExecuteHexReceiveMsg = {
+        receive_hex_randomness: {
+            request_id: "job 1",
+            randomness: ["aabbccddeeff"]
+        }
+    }
     
+    let receive_res = await client.execute(
+        accs[0].address, 
+        test_addr,
+        ExecuteHexReceiveMsg,
+        "auto",
+        "randomness token",
+    )
+
+    console.log(receive_res.logs[0].events)
+    console.log(receive_res.logs[0].events[0])
+    console.log(receive_res.logs[0].events[1])
+    console.log(receive_res.logs[0].events[2])
+    */  
+    /*
     const QueryResponsesMsg = {
         get_responses: {}
     }
     const res = await  client.queryContractSmart(test_addr, QueryResponsesMsg);
 
-    console.log(res)
+    console.log(res)*/
     /*
     for(const index in job_ids){
         try{
             const ExecuteRequestHexRandomness = {
                 request_hex_randomness: {
-                    job_id: job_ids[index],
+                    request_id: job_ids[index],
                 }
             }
             let register_res = await client.execute(
@@ -74,8 +95,8 @@ async function run(mne, job_ids) {
         }catch(err){
             console.log(err)
         }
-    }*/
-
+    }
+    
     const QueryPendingCommitmentsMsg = {
         get_pending_commitments: {}
     }
@@ -87,17 +108,19 @@ async function run(mne, job_ids) {
     }
     const commitments_res = await  client.queryContractSmart(aurand_addr, QueryCommitmentsMsg);
     console.log(commitments_res)
+    */
     
     const randomness = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
     const ExecuteReceiveMsg = {
         receive: {
             callback: {
-                job_id: "06ed32dd4bb686d73cbac4f2c166c7c7e56806714287052d44dce5b3bfda9d27",
+                job_id: "9cc713b3a35b38476c8cc7c41026f6c84b5b7aa2bebc9d7419300623e55dd6e4",
                 randomness: randomness
             }
         }
     }
+    
     let receive_res = await client.execute(
         accs[0].address, 
         aurand_addr,
@@ -110,6 +133,26 @@ async function run(mne, job_ids) {
     console.log(receive_res.logs[0].events[0])
     console.log(receive_res.logs[0].events[1])
     console.log(receive_res.logs[0].events[2])
+
+    const QueryPendingCommitmentsMsg = {
+        get_pending_commitments: {}
+    }
+    const pending_commitments_res = await  client.queryContractSmart(aurand_addr, QueryPendingCommitmentsMsg);
+    console.log(pending_commitments_res)
+
+    const QueryCommitmentsMsg = {
+        get_commitments: {}
+    }
+    const commitments_res = await  client.queryContractSmart(aurand_addr, QueryCommitmentsMsg);
+    console.log(commitments_res)
+
+    const QueryResponsesMsg = {
+        get_responses: {}
+    }
+    const res = await  client.queryContractSmart(test_addr, QueryResponsesMsg);
+
+    console.log(res)
+    
 } 
 
 await run(mnemonic, job_ids)
