@@ -20,7 +20,11 @@
   "dependencies": {
     "config": "^3.3.8",
     "cosmwasm": "^1.1.1",
+    "dotenv": "^16.0.3",
     "drand-client": "^0.2.0",
+    "ky-universal": "^0.11.0",
+    "put-after": "^2.0.1",
+    "rdo": "^2.0.0",
     "secp256k1": "^4.0.3"
   }
 }
