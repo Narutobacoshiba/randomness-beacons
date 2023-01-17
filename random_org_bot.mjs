@@ -173,6 +173,7 @@ async function main() {
 
     console.info(infoColor("Get random org randomness ..."));
     const random_value = await getSignedInteger({api_key: api_key, min: 0, max: 255, amount: 32 })
+    console.info(successColor(`Receive random value with completion time: ${random_value.random.completionTime}`))
 
     try {
         const msg = {
