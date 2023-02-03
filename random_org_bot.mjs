@@ -199,7 +199,7 @@ async function main() {
                                 signature: random_value.signature
                             },
                         }),
-                    ),
+                    )
                 }),
             };
             
@@ -211,7 +211,7 @@ async function main() {
                 usedFee = calculateFee(gasWanted, gasPrice);
             } else {
                 const gasEstimation = await client.simulate(botAddress, [msg], memo);
-                const multiplier = 1.8;
+                const multiplier = 1.5;
                 usedFee = calculateFee(Math.round(gasEstimation * multiplier), gasPrice);
             }
             
